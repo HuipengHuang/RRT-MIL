@@ -225,9 +225,7 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         criterion = nn.BCEWithLogitsLoss()
     elif args.loss == 'ce':
         criterion = nn.CrossEntropyLoss()
-    print("loss")
-    print(args.loss)
-    print(args.n_classes)
+
     # optimizer
     if args.opt == 'adamw':
         optimizer = torch.optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=args.lr, weight_decay=args.weight_decay)
@@ -415,6 +413,8 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
     return [acs,pre,rec,fs,auc,te_auc,te_fs]
 
 def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_scaler,scheduler,k,epoch):
+    print("step")
+    print(args.accumulation_steps)
     start = time.time()
     loss_cls_meter = AverageMeter()
     loss_cl_meter = AverageMeter()
