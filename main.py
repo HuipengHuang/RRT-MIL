@@ -108,9 +108,6 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
 
         train_set = C16Dataset(train_p[k],train_l[k],root=args.dataset_root,persistence=args.persistence,keep_same_psize=args.same_psize,is_train=True)
         test_set = C16Dataset(test_p[k],test_l[k],root=args.dataset_root,persistence=args.persistence,keep_same_psize=args.same_psize)
-        print("hahaha")
-        print(len(train_set))
-        print(len(test_set))
         if args.val_ratio != 0.:
             val_set = C16Dataset(val_p[k],val_l[k],root=args.dataset_root,persistence=args.persistence,keep_same_psize=args.same_psize)
         else:
@@ -228,7 +225,9 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         criterion = nn.BCEWithLogitsLoss()
     elif args.loss == 'ce':
         criterion = nn.CrossEntropyLoss()
-
+    print("loss")
+    print(args.loss)
+    print(args.n_classes)
     # optimizer
     if args.opt == 'adamw':
         optimizer = torch.optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=args.lr, weight_decay=args.weight_decay)
