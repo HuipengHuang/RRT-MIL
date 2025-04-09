@@ -432,13 +432,12 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
             for i in range(len(data[0])):
                 data[0][i] = data[0][i].to(device)
             bag=data[0]
-            print("datatype")
-            print(bag.dtype)
             batch_size=data[0][0].size(0)
         else:
             bag=data[0].to(device)  # b*n*1024
             batch_size=bag.size(0)
-            
+            print("datatype")
+            print(bag.dtype)
         label=data[1].to(device)
         
         with amp_autocast():
