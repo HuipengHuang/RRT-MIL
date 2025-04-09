@@ -220,7 +220,7 @@ class RRTMIL(nn.Module):
 
         self.pool_fn = DAttention(self.online_encoder.final_dim,da_act,gated=da_gated,bias=da_bias,dropout=da_dropout) if pool == 'attn' else nn.AdaptiveAvgPool1d(1)
         
-        self.predictor = nn.Linear(self.online_encoder.final_dim,n_classes)
+        self.predictor = nn.Linear(self.online_encoder.final_dim, n_classes)
 
         self.apply(initialize_weights)
 

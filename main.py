@@ -215,8 +215,6 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         model = clam.CLAM_MB(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act,rrt=rrt_enc).to(device)
     elif args.model == 'transmil':
         model = transmil.TransMIL(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act).to(device)
-        print("model")
-        print(args.dropout, args.act, args.n_classes)
 
     elif args.model == 'dsmil':
         model = dsmil.MILNet(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act,rrt=rrt_enc).to(device)
@@ -459,6 +457,9 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
                 train_logits,cls_loss,patch_num = model(bag,label,criterion)
                 keep_num = patch_num
             else:
+                print("shape")
+                print(bag.shape)
+                print(label.shape)
                 train_logits = model(bag)
                 cls_loss,patch_num,keep_num = 0.,0.,0.
             if args.loss == 'ce':
