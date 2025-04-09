@@ -60,7 +60,8 @@ def main(args):
             acs, pre, rec,fs,auc,te_auc,te_fs = ckp['ckc_metric']
         else:
             acs, pre, rec,fs,auc = ckp['ckc_metric']
-
+    print("49")
+    print(args.fold_start, args.cv_fold)
     for k in range(args.fold_start, args.cv_fold):
         if not args.no_log:
             print('Start %d-fold cross validation: fold %d ' % (args.cv_fold, k))
@@ -413,8 +414,6 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
     return [acs,pre,rec,fs,auc,te_auc,te_fs]
 
 def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_scaler,scheduler,k,epoch):
-    print("step")
-    print(args.accumulation_steps)
     start = time.time()
     loss_cls_meter = AverageMeter()
     loss_cl_meter = AverageMeter()
