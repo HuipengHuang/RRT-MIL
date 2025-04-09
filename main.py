@@ -262,6 +262,9 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         seed_torch(args.seed)
 
     # resume
+    print("load or not")
+    print(args.auto_resume and not args.no_log)
+    print(model.parameters())
     if args.auto_resume and not args.no_log:
         ckp = torch.load(os.path.join(args.model_path,'ckp.pt'))
         epoch_start = ckp['epoch']
