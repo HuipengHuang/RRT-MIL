@@ -449,16 +449,15 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
                 bag = patch_shuffle(bag,args.shuffle_group)
             elif args.group_shuffle:
                 bag = group_shuffle(bag,args.shuffle_group)
-            print("shuffle")
-            print(args.patch_shuffle)
-            print(args.group_shuffle)
+
             if args.model in ('clam_sb','clam_mb','dsmil'):
                 train_logits,cls_loss,patch_num = model(bag,label,criterion)
                 keep_num = patch_num
             else:
                 train_logits = model(bag)
                 cls_loss,patch_num,keep_num = 0.,0.,0.
-
+            print("logit shape")
+            print(train_logits.shape)
             if args.loss == 'ce':
                 logit_loss = criterion(train_logits.view(batch_size,-1),label)
             elif args.loss == 'bce':
@@ -467,10 +466,7 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
         train_loss = args.cls_alpha * logit_loss +  cls_loss*args.aux_alpha
 
         train_loss = train_loss / args.accumulation_steps
-        print("---")
-        print(args.accumulation_steps)
-        print(args.cls_alpha)
-        print(args.loss)
+
         if args.clip_grad > 0.:
             dispatch_clip_grad(
                 model_parameters(model),
