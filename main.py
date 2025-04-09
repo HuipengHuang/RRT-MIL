@@ -449,7 +449,9 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
                 bag = patch_shuffle(bag,args.shuffle_group)
             elif args.group_shuffle:
                 bag = group_shuffle(bag,args.shuffle_group)
-
+            print("shuffle")
+            print(args.patch_shuffle)
+            print(args.group_shuffle)
             if args.model in ('clam_sb','clam_mb','dsmil'):
                 train_logits,cls_loss,patch_num = model(bag,label,criterion)
                 keep_num = patch_num
