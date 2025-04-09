@@ -210,8 +210,6 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         model = clam.CLAM_MB(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act,rrt=rrt_enc).to(device)
     elif args.model == 'transmil':
         model = transmil.TransMIL(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act).to(device)
-        print("transmil")
-        print(args.input_dim,args.n_classes,args.dropout,args.act)
 
 
     elif args.model == 'dsmil':
@@ -283,7 +281,7 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
     # wandb.watch(model, log_freq=100)
 
 
-    for epoch in range(10):
+    for epoch in range(200):
         train_loss,start,end = train_loop(args,model,train_loader,optimizer,device,amp_autocast,criterion,loss_scaler,scheduler,k,epoch)
         train_time_meter.update(end-start)
         stop,accuracy, auc_value, precision, recall, fscore, test_loss = val_loop(args,model,val_loader,device,criterion,early_stopping,epoch)
