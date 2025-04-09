@@ -281,6 +281,8 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
 
     train_time_meter = AverageMeter()
     # wandb.watch(model, log_freq=100)
+    print("epoch")
+    print(epoch_start, args.num_epoch)
     for epoch in range(epoch_start, args.num_epoch):
         train_loss,start,end = train_loop(args,model,train_loader,optimizer,device,amp_autocast,criterion,loss_scaler,scheduler,k,epoch)
         train_time_meter.update(end-start)
