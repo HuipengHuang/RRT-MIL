@@ -25,6 +25,7 @@ def get_patient_label(csv_file):
     a=Counter(labels_list)
     print("patient_len:{} label_len:{}".format(len(patients_list), len(labels_list)))
     print("all_counter:{}".format(dict(a)))
+    print(patients_list[:10])
     return np.array(patients_list,dtype=object), np.array(labels_list,dtype=object)
 
 def data_split(full_list, ratio, shuffle=True,label=None,label_balance_val=True):

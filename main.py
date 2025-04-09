@@ -61,6 +61,7 @@ def main(args):
         else:
             acs, pre, rec,fs,auc = ckp['ckc_metric']
     print("49")
+    """0 and 3"""
     print(args.fold_start, args.cv_fold)
     for k in range(args.fold_start, args.cv_fold):
         if not args.no_log:
