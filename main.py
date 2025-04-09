@@ -234,10 +234,6 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         optimizer = torch.optim.AdamW(filter(lambda p: p.requires_grad, model.parameters()), lr=args.lr, weight_decay=args.weight_decay)
     elif args.opt == 'adam':
         optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=args.lr, weight_decay=args.weight_decay)
-    print("optimizer")
-    print(args.opt)
-    print(args.lr)
-    print(args.weight_decay)
     if args.lr_sche == 'cosine':
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, args.num_epoch, 0) if not args.lr_supi else torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, args.num_epoch*len(train_loader), 0)
     elif args.lr_sche == 'step':
@@ -436,6 +432,8 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
             for i in range(len(data[0])):
                 data[0][i] = data[0][i].to(device)
             bag=data[0]
+            print("datatype")
+            print(bag.dtype)
             batch_size=data[0][0].size(0)
         else:
             bag=data[0].to(device)  # b*n*1024
@@ -463,8 +461,6 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
         train_loss = args.cls_alpha * logit_loss +  cls_loss*args.aux_alpha
 
         train_loss = train_loss / args.accumulation_steps
-        print(args.accumulation_steps)
-        print("stepstep")
 
         if args.clip_grad > 0.:
             dispatch_clip_grad(
