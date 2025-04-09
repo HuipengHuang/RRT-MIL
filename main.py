@@ -215,6 +215,9 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         model = clam.CLAM_MB(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act,rrt=rrt_enc).to(device)
     elif args.model == 'transmil':
         model = transmil.TransMIL(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act).to(device)
+        print("model")
+        print(args.dropout, args.act, args.n_classes)
+        print(model.state_dict())
     elif args.model == 'dsmil':
         model = dsmil.MILNet(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act,rrt=rrt_enc).to(device)
         args.cls_alpha = 0.5
@@ -262,9 +265,6 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         seed_torch(args.seed)
 
     # resume
-    print("load or not")
-    print(args.auto_resume and not args.no_log)
-    print(model.parameters())
     if args.auto_resume and not args.no_log:
         ckp = torch.load(os.path.join(args.model_path,'ckp.pt'))
         epoch_start = ckp['epoch']
@@ -459,8 +459,6 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
             else:
                 train_logits = model(bag)
                 cls_loss,patch_num,keep_num = 0.,0.,0.
-            print("logit shape")
-            print(train_logits.shape)
             if args.loss == 'ce':
                 logit_loss = criterion(train_logits.view(batch_size,-1),label)
             elif args.loss == 'bce':
