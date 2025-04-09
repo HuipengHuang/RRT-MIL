@@ -98,9 +98,6 @@ def main(args):
         print('Cross validation fscore mean: %.3f, std %.3f ' % (np.mean(np.array(fs)), np.std(np.array(fs))))
 
 def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
-    print(len(train_p[0]), len(test_p[0]), len(val_p[0]))
-    print("ll")
-    print(args.amp)
     # ---> Initialization
     seed_torch(args.seed)
     loss_scaler = GradScaler() if args.amp else None
@@ -110,10 +107,7 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
 
     # ---> Loading data
     if args.datasets.lower() == 'camelyon16':
-        print(len(train_p))
-        print(len(train_p[0]))
-        print(len(train_p[1]))
-        print("len")
+
         train_set = C16Dataset(train_p[k],train_l[k],root=args.dataset_root,persistence=args.persistence,keep_same_psize=args.same_psize,is_train=True)
         test_set = C16Dataset(test_p[k],test_l[k],root=args.dataset_root,persistence=args.persistence,keep_same_psize=args.same_psize)
         if args.val_ratio != 0.:
@@ -469,6 +463,8 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
         train_loss = args.cls_alpha * logit_loss +  cls_loss*args.aux_alpha
 
         train_loss = train_loss / args.accumulation_steps
+        print(args.accumulation_steps)
+        print("stepstep")
 
         if args.clip_grad > 0.:
             dispatch_clip_grad(
