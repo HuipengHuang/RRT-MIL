@@ -52,7 +52,7 @@ def main(args):
 
     # resume
     if args.auto_resume and not args.no_log:
-        print("i am in in")
+        #  did not come in.
         ckp = torch.load(os.path.join(args.model_path,'ckp.pt'))
         args.fold_start = ckp['k']
         if len(ckp['ckc_metric']) == 6:
@@ -107,7 +107,9 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
 
     # ---> Loading data
     if args.datasets.lower() == 'camelyon16':
-
+        print(len(train_p[0]))
+        print(len(train_p[1]))
+        print("len")
         train_set = C16Dataset(train_p[k],train_l[k],root=args.dataset_root,persistence=args.persistence,keep_same_psize=args.same_psize,is_train=True)
         test_set = C16Dataset(test_p[k],test_l[k],root=args.dataset_root,persistence=args.persistence,keep_same_psize=args.same_psize)
         if args.val_ratio != 0.:
