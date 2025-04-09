@@ -465,8 +465,9 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
         train_loss = args.cls_alpha * logit_loss +  cls_loss*args.aux_alpha
 
         train_loss = train_loss / args.accumulation_steps
+        print("clip grad")
+        print(args.clip_grad)
         if args.clip_grad > 0.:
-            print("clip grad")
             dispatch_clip_grad(
                 model_parameters(model),
                 value=args.clip_grad, mode='norm')
