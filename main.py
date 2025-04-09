@@ -107,6 +107,7 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
 
     # ---> Loading data
     if args.datasets.lower() == 'camelyon16':
+        print(len(train_p))
         print(len(train_p[0]))
         print(len(train_p[1]))
         print("len")
