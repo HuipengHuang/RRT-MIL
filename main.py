@@ -279,6 +279,9 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
     train_time_meter = AverageMeter()
     # wandb.watch(model, log_freq=100)
 
+    print("learning rate")
+    print(args.learning_rate)
+
     for epoch in range(10):
         train_loss,start,end = train_loop(args,model,train_loader,optimizer,device,amp_autocast,criterion,loss_scaler,scheduler,k,epoch)
         train_time_meter.update(end-start)
@@ -436,8 +439,6 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
         else:
             bag=data[0].to(device)  # b*n*1024
             batch_size=bag.size(0)
-            print("datatype")
-            print(bag.dtype)
         label=data[1].to(device)
         
         with amp_autocast():
