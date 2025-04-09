@@ -82,6 +82,8 @@ def get_kflod(k, patients_array, labels_array,val_ratio=False,label_balance_val=
         else:
             x_val, y_val = [],[]
         x_train, x_test = patients_array[train_index], patients_array[test_index]
+        print("flod")
+        print(len(x_train),len(x_test))
         y_train, y_test = labels_array[train_index], labels_array[test_index]
 
         train_patients_list.append(x_train)
