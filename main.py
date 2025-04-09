@@ -457,9 +457,6 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
                 train_logits,cls_loss,patch_num = model(bag,label,criterion)
                 keep_num = patch_num
             else:
-                print("shape")
-                print(bag.shape)
-                print(label.shape)
                 train_logits = model(bag)
                 cls_loss,patch_num,keep_num = 0.,0.,0.
             if args.loss == 'ce':
