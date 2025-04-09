@@ -217,7 +217,7 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
         model = transmil.TransMIL(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act).to(device)
         print("model")
         print(args.dropout, args.act, args.n_classes)
-        print(model.state_dict())
+
     elif args.model == 'dsmil':
         model = dsmil.MILNet(input_dim=args.input_dim,n_classes=args.n_classes,dropout=args.dropout,act=args.act,rrt=rrt_enc).to(device)
         args.cls_alpha = 0.5
