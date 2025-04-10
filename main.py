@@ -466,12 +466,12 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
                 model_parameters(model),
                 value=args.clip_grad, mode='norm')
 
+        print("stepping")
+        print(args.lr_supi)
+        print(scheduler)
         if (i+1) % args.accumulation_steps == 0:
             train_loss.backward()
             optimizer.step()
-            print("stepping")
-            print(args.lr_supi)
-            print(scheduler)
             if args.lr_supi and scheduler is not None:
                 scheduler.step()
 
