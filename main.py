@@ -469,9 +469,10 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
         if (i+1) % args.accumulation_steps == 0:
             train_loss.backward()
             optimizer.step()
+            print("stepping")
+            print(args.lr_supi)
+            print(scheduler)
             if args.lr_supi and scheduler is not None:
-                print("stepping")
-                print(args.lr_supi)
                 scheduler.step()
 
         loss_cls_meter.update(logit_loss,1)
