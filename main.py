@@ -470,6 +470,8 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
             train_loss.backward()
             optimizer.step()
             if args.lr_supi and scheduler is not None:
+                print("stepping")
+                print(args.lr_supi)
                 scheduler.step()
 
         loss_cls_meter.update(logit_loss,1)
