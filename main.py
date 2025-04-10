@@ -453,6 +453,7 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
                 train_logits = model(bag)
                 cls_loss,patch_num,keep_num = 0.,0.,0.
             if args.loss == 'ce':
+                print(train_logits.shape)
                 logit_loss = criterion(train_logits.view(batch_size,-1),label)
             elif args.loss == 'bce':
                 logit_loss = criterion(train_logits.view(batch_size,-1),one_hot(label.view(batch_size,-1).float(),num_classes=2))
@@ -466,9 +467,6 @@ def train_loop(args,model,loader,optimizer,device,amp_autocast,criterion,loss_sc
                 model_parameters(model),
                 value=args.clip_grad, mode='norm')
 
-        print("stepping")
-        print(args.lr_supi)
-        print(scheduler)
         if (i+1) % args.accumulation_steps == 0:
             train_loss.backward()
             optimizer.step()
