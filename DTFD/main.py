@@ -420,14 +420,13 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
                                           f_log=None, writer=None, numGroup=3, total_instance=3, distill='MaxMinS'):
     start = time.time()
     SlideNames_list, mFeat_list, Label_dict = mDATA_list
-    print("412412")
-    print(type(mFeat_list[0]))
-    print(Label_dict)
+
     classifier.train()
     dimReduction.train()
     attention.train()
     UClassifier.train()
-
+    print("total instance")
+    print(total_instance)
     instance_per_group = total_instance // numGroup
 
     Train_Loss0 = AverageMeter()
