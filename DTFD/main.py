@@ -470,8 +470,8 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
             slide_sub_labels = []
 
             tfeat_tensor = mFeat_list[slide_idx]
-            print("tensor")
-            print(tfeat_tensor.shape)
+            print("instance")
+            print(instance_per_group)
             tfeat_tensor = tfeat_tensor.to(params.device)
 
             feat_index = list(range(tfeat_tensor.shape[0]))
