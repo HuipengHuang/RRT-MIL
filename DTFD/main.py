@@ -476,10 +476,9 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
             if params.patch_shuffle:
                 random.shuffle(feat_index)
             index_chunk_list = np.array_split(np.array(feat_index), numGroup)
-            print("before")
-            print(index_chunk_list)
+
             index_chunk_list = [sst.tolist() for sst in index_chunk_list]
-            print(index_chunk_list)
+
             for tindex in index_chunk_list:
                 slide_sub_labels.append(tslideLabel)
                 subFeat_tensor = torch.index_select(tfeat_tensor, dim=0, index=torch.LongTensor(tindex).to(params.device))

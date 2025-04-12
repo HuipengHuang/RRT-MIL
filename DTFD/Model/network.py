@@ -51,6 +51,8 @@ class residual_block(nn.Module):
         return x
 class DimReduction(nn.Module):
     def __init__(self, n_channels, m_dim=512, numLayer_Res=0,dropout=False,act='relu'):
+        print("resres")
+        print(numLayer_Res)
         super(DimReduction, self).__init__()
         self.fc1 = nn.Linear(n_channels, m_dim, bias=False)
         # rtt
