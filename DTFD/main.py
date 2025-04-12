@@ -425,9 +425,6 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
     dimReduction.train()
     attention.train()
     UClassifier.train()
-    print("total instance")
-    print(total_instance)
-    print(numGroup)
     instance_per_group = total_instance // numGroup
 
     Train_Loss0 = AverageMeter()
@@ -467,7 +464,8 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
 
         for tidx, (tslide, slide_idx) in enumerate(zip(tslide_name, tidx_slide)):
             tslideLabel = label_tensor[tidx].unsqueeze(0)
-
+            print("now on")
+            print(tslideLabel)
             slide_pseudo_feat = []
             slide_sub_preds = []
             slide_sub_labels = []
