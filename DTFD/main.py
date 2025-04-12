@@ -464,15 +464,15 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
 
         for tidx, (tslide, slide_idx) in enumerate(zip(tslide_name, tidx_slide)):
             tslideLabel = label_tensor[tidx].unsqueeze(0)
-            print("now on")
-            print(tslideLabel)
+
             slide_pseudo_feat = []
             slide_sub_preds = []
             slide_sub_labels = []
 
             tfeat_tensor = mFeat_list[slide_idx]
             tfeat_tensor = tfeat_tensor.to(params.device)
-
+            print("tensor shape")
+            print(tfeat_tensor.shape)
             feat_index = list(range(tfeat_tensor.shape[0]))
             if params.patch_shuffle:
                 random.shuffle(feat_index)
