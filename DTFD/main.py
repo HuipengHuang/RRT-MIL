@@ -420,7 +420,9 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
                                           f_log=None, writer=None, numGroup=3, total_instance=3, distill='MaxMinS'):
     start = time.time()
     SlideNames_list, mFeat_list, Label_dict = mDATA_list
-
+    print("412412")
+    print(type(mFeat_list[0]))
+    print(Label_dict)
     classifier.train()
     dimReduction.train()
     attention.train()
@@ -456,7 +458,7 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
     # torch.autograd.set_detect_anomaly(True)
     for idx in range(numIter):
 
-        tidx_slide = tIDX[idx * params.batch_size:(idx + 1) * params.batch_size]
+        tidx_slide = tIDX[idx * params.batch_size : (idx + 1) * params.batch_size]
 
         tslide_name = [SlideNames_list[sst] for sst in tidx_slide]
         tlabel = [Label_dict[sst] for sst in tidx_slide]
