@@ -427,6 +427,7 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
     UClassifier.train()
     print("total instance")
     print(total_instance)
+    print(numGroup)
     instance_per_group = total_instance // numGroup
 
     Train_Loss0 = AverageMeter()
