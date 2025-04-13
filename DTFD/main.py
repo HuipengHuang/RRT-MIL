@@ -490,8 +490,7 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
                 tattFeats = torch.einsum('ns,n->ns', tmidFeat, tAA)  ### n x fs
                 tattFeat_tensor = torch.sum(tattFeats, dim=0).unsqueeze(0)  ## 1 x fs
                 tPredict = classifier(tattFeat_tensor)  ### 1 x 2
-                print("tpredict")
-                print(tPredict.shape)
+
                 slide_sub_preds.append(tPredict)
 
                 patch_pred_logits = get_cam_1d(classifier, tattFeats.unsqueeze(0)).squeeze(0)  ###  cls x n
@@ -518,6 +517,7 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
             slide_pseudo_feat = torch.cat(slide_pseudo_feat, dim=0)  ### numGroup x fs
             print(slide_pseudo_feat[0].shape)
             ## optimization for the first tier
+            print(len(slide_sub_preds))
             slide_sub_preds = torch.cat(slide_sub_preds, dim=0) ### numGroup x fs
             slide_sub_labels = torch.cat(slide_sub_labels, dim=0) ### numGroup
             print(slide_sub_labels.shape)
