@@ -517,7 +517,7 @@ def train_attention_preFeature_DTFD(mDATA_list, classifier, dimReduction, attent
             print(slide_pseudo_feat.shape)
             ## optimization for the first tier
             slide_sub_preds = torch.cat(slide_sub_preds, dim=0) ### numGroup x fs
-
+            print(slide_sub_labels.shape)
             slide_sub_labels = torch.cat(slide_sub_labels, dim=0) ### numGroup
             loss0 = ce_cri(slide_sub_preds, slide_sub_labels).mean()
             optimizer0.zero_grad()
